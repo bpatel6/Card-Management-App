@@ -3,5 +3,11 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#   cards = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+cards=[{:card_value=>'1',:card_suit=>'Spades',:pile_id=>0},
+              {:card_value=>'2',:card_suit=>'Spades',:pile_id=>0}]
+
+cards.each do |card|
+  Card.create!(card)
+end
