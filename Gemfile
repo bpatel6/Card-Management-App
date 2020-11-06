@@ -62,7 +62,7 @@ group :production do
   # for Heroku production deployment
   # NOTE RAILS PRIOR TO 5.15 do not support the pg 1.0.0 module!
   #  NOTE: You may need to research proper gem version compatibility for your environment.
-  gem 'pg', '~> 0.21'
+  gem 'pg'
   gem 'rails_12factor'
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
