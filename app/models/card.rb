@@ -1,2 +1,2 @@
-class Card<ActiveRecord::Base
+class Card < ActiveRecord::Base
 end
