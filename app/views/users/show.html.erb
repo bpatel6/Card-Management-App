@@ -1,4 +1,9 @@
 <h1>User Hand</h1>
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+
+<%= button_to 'Draw Card', users_draw_path %>
 
 <table>
   <thead>
@@ -7,12 +12,14 @@
   </tr>
   </thead>
   <tbody>
-  <% @hand_cards.each do |card| %>
-    <tr>
-      <td>
-        <%= card[:card_value] + ' of ' + card[:card_suit] %>
-      </td>
-    </tr>
+  <% if @hand_cards != nil %>
+    <% @hand_cards.each do |card| %>
+      <tr>
+        <td>
+          <%= card[:card_value] + ' of ' + card[:card_suit] %>
+        </td>
+      </tr>
+    <% end %>
   <% end %>
   </tbody>
 </table>
