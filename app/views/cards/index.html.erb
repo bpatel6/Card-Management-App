@@ -1,0 +1,27 @@
+<h1>Game Coming Soon</h1>
+
+<%= button_to 'Guest User', users_show_path, method: :get%>
+
+<h2>Deck</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Card</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @cards.present? %>
+    <% @cards.each do |card| %>
+      <tr>
+        <td>
+          <%= card[:card_value] + ' of ' + card[:card_suit] %>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td> Deck is empty </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
