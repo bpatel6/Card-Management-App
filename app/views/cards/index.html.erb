@@ -10,11 +10,17 @@
   </tr>
   </thead>
   <tbody>
-  <% @cards.each do |card| %>
+  <% if @cards.present? %>
+    <% @cards.each do |card| %>
+      <tr>
+        <td>
+          <%= card[:card_value] + ' of ' + card[:card_suit] %>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
     <tr>
-      <td>
-        <%= card[:card_value] + ' of ' + card[:card_suit] %>
-      </td>
+      <td> Deck is empty </td>
     </tr>
   <% end %>
   </tbody>
