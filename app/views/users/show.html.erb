@@ -1,8 +1,5 @@
-<h1>Game Coming Soon</h1>
+<h1>User Hand</h1>
 
-<%= button_to 'Guest User', users_show_path, method: :get%>
-
-<h2>Deck</h2>
 <table>
   <thead>
   <tr>
@@ -10,7 +7,7 @@
   </tr>
   </thead>
   <tbody>
-  <% @cards.each do |card| %>
+  <% @hand_cards.each do |card| %>
     <tr>
       <td>
         <%= card[:card_value] + ' of ' + card[:card_suit] %>
@@ -19,3 +16,5 @@
   <% end %>
   </tbody>
 </table>
+
+<%= link_to 'Return to Deck', cards_path %>
