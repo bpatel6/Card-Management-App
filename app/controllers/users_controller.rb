@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def show
-    @hand_cards = Card.where(pile_id: 666)
+    @hand_cards = Card.where(pile_id: 666).sort_by{ |card| card[:card_suit]}
   end
 
   def draw
