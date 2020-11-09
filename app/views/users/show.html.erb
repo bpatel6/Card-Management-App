@@ -5,26 +5,29 @@
 
 <%= button_to 'Draw Card', users_draw_path %>
 
-<table>
-  <thead>
-  <tr>
-    <th>Card</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% if @hand_cards != nil %>
-    <% @hand_cards.each do |card| %>
-      <tr>
-        <td>
-          <%= card[:card_value] + ' of ' + card[:card_suit] %>
-        </td>
-        <td>
-          <%= check_box_tag("discard_card[#{card[:id]}]", "1", false) %>
-        </td>
-      </tr>
+<%= form_tag users_discard_path do %>
+  <table>
+    <thead>
+    <tr>
+      <th>Card</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @hand_cards != nil %>
+      <% @hand_cards.each do |card| %>
+        <tr>
+          <td>
+            <%= card[:card_value] + ' of ' + card[:card_suit] %>
+          </td>
+          <td>
+            <%= check_box_tag("discard_card[#{card[:id]}]", "1", false) %>
+          </td>
+        </tr>
+      <% end %>
     <% end %>
-  <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  <%= submit_tag 'Discard' %>
+<% end  %>
 
 <%= link_to 'Return to Deck', cards_path %>
