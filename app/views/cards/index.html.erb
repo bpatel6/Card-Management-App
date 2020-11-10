@@ -31,3 +31,25 @@
   <% end %>
   </tbody>
 </table>
+
+
+<h2> Discarded Deck </h2>
+<table>
+  <thead>
+  <tr>
+    <th>Cards</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @cards.each do |card| %>
+    <tr>
+      <td>
+        <% if card[:pile_id] == 100 %>
+          <%= card[:card_value] + ' of ' + card[:card_suit] %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+  </thead>
+</table>

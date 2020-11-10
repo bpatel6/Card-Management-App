@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   get 'users/show'
   post 'users/draw'
   post 'cards/deal_all'
+  post 'users/discard'
 
 end
