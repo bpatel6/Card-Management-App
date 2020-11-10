@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :users
   get 'users/show'
   post 'users/draw'
+  post 'users/discard'
 
 end
