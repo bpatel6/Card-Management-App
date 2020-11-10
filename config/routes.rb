@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   post 'cards/deal_all'
   post 'users/discard'
 
+  resources :settings
+  root :to => redirect('/settings')
+
 end
