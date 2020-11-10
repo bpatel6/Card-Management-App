@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a card management project for Team 9 for the course Software Engineering Languages and Tools in Fall 2020. The team members are Meghan Saak, Suchita Patel, Bhavik Patel, Bryce Jacobson, Nick Smith, and Matt Perng.
 
-Things you may want to cover:
+Link to heroku app: https://selt2020-g009-sprint1.herokuapp.com/cards
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
