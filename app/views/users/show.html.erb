@@ -18,6 +18,9 @@
         <td>
           <%= card[:card_value] + ' of ' + card[:card_suit] %>
         </td>
+        <td>
+          <%= check_box_tag("discard_card[#{card[:id]}]", "1", false) %>
+        </td>
       </tr>
     <% end %>
   <% end %>
