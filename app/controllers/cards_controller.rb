@@ -5,7 +5,6 @@ class CardsController < ApplicationController
   end
 
   def deal_all
-    puts("Deal_All accessed")
     redirect_to cards_path
   end
 
