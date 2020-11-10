@@ -1,10 +1,12 @@
 <h1>Game Coming Soon</h1>
 
 <%= button_to 'Guest User', users_show_path, method: :get%>
-<%= form_tag cards_deal_all_path, :method =>:get do %>
-  <%text_fild_tag :num_cards, params[:num_cards] %>
-  <%submit_tag "Deal Cards To All Players", name: cards_deal_all_path %>
-<%end %>
+
+<%= form_tag cards_deal_all_path, method: :get do %>
+  <%= label :num_cards, 'Number of Cards To Deal to All Players' %>
+  <%= text_field_tag :num_cards, params[:num_cards] %>
+  <%= submit_tag "Deal Cards", name: cards_deal_all_path %>
+<% end %>
 
 <h2>Deck</h2>
 <table>
