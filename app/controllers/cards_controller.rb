@@ -4,4 +4,8 @@ class CardsController < ApplicationController
     @cards = Card.where(pile_id: 0)
   end
 
+  def deal_all
+
+  end
+
 end
