@@ -33,7 +33,7 @@
 </table>
 
 
-<h2> Discarded Deck </h2>
+<h2>Discarded Deck</h2>
 <table>
   <thead>
   <tr>
@@ -41,15 +41,20 @@
   </tr>
   </thead>
   <tbody>
-  <% @cards.each do |card| %>
+  <% if @discard_card.present? %>
+    <% @discard_card.each do |card| %>
+      <tr>
+        <td>
+          <% if card[:pile_id] == 100 %>
+            <%= card[:card_value] + ' of ' + card[:card_suit] %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
     <tr>
-      <td>
-        <% if card[:pile_id] == 100 %>
-          <%= card[:card_value] + ' of ' + card[:card_suit] %>
-        <% end %>
-      </td>
+      <td> Discard deck is empty </td>
     </tr>
   <% end %>
   </tbody>
-  </thead>
 </table>
