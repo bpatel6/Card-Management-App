@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def show
-    @hand_cards = Card.where(pile_id: 666).sort_by{ |card| card[:card_suit]}
+    @hand_cards = Card.where(pile_id: current_user.id).sort_by{ |card| card[:card_suit]}
   end
 
   def draw
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if card.nil?
       flash[:notice] = 'No card available in the deck'
     else
-      card.update(pile_id: 666)
+      card.update(pile_id: current_user.id)
       flash[:notice] = "You got #{card.card_value} of #{card.card_suit}"
     end
     redirect_to users_show_path
