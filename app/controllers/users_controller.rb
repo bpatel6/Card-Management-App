@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
   def show
-    @hand_cards = Card.where(pile_id: current_user.id).sort_by{ |card| card[:card_suit]}
+    if current_user == nil
+      redirect_to cards_path, notice: "You are not logged in, Must log in to view your cards"
+    else
+      @hand_cards = Card.where(pile_id: current_user.id).sort_by{ |card| card[:card_suit]}
+    end
   end
 
   def draw
