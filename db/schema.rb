@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_221900) do
+ActiveRecord::Schema.define(version: 2020_11_13_233807) do
 
   create_table "cards", force: :cascade do |t|
     t.string "card_value"
@@ -18,11 +18,12 @@ ActiveRecord::Schema.define(version: 2020_11_15_221900) do
     t.integer "pile_id"
   end
 
-  create_table "settings", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "provider"
     t.string "uid"
-    t.integer "num_decks"
-    t.string "num_players"
-    t.string "deck_settings"
+    t.string "email"
+    t.string "encrypted_password"
     t.string "session_token"
   end
 
