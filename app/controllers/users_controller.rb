@@ -33,4 +33,8 @@ class UsersController < ApplicationController
     redirect_to users_show_path
   end
 
+  def increment_score
+    
+  end
+
 end
