@@ -11,6 +11,7 @@
 <%= button_to 'Draw Card', users_draw_path %>
 
 <%= form_tag users_discard_path do %>
+  <%= submit_tag 'Discard' %>
   <table>
     <thead>
     <tr>
@@ -32,8 +33,11 @@
     <% end %>
     </tbody>
   </table>
-  <%= submit_tag 'Discard' %>
 <% end  %>
+
+<%= button_to "+" %>
+<p> Score board </p>
+<%= button_to "-" %>
 
 <%= link_to 'Return to Discard Deck', cards_path %>
 <%= link_to 'Return to Deck', cards_path %>
