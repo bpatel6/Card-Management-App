@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post 'users/draw'
   post 'cards/deal_all'
   post 'users/discard'
+  post 'users/increment_score'
 
   resources :settings
   root :to => redirect('/settings')
