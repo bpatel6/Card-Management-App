@@ -35,9 +35,10 @@
   </table>
 <% end  %>
 
-<%= button_to "+" %>
-<p> Score board </p>
-<%= button_to "-" %>
+
+<%= button_to '+', users_increment_score_path %>
+<%= @increment_score %>
+
 
 <%= link_to 'Return to Discard Deck', cards_path %>
 <%= link_to 'Return to Deck', cards_path %>
