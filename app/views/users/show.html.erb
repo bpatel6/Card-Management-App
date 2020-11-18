@@ -3,6 +3,11 @@
   <%= flash[:notice] %>
 <% end %>
 
+<% if @current_user %>
+  Signed in as <%= @current_user.name %>
+  <%= link_to 'sign out', signout_path %>
+<% end %>
+
 <%= button_to 'Draw Card', users_draw_path %>
 
 <%= form_tag users_discard_path do %>
