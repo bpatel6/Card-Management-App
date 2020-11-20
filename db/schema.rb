@@ -18,6 +18,12 @@ ActiveRecord::Schema.define(version: 2020_11_15_221900) do
     t.integer "pile_id"
   end
 
+  create_table "scores", force: :cascade do |t|
+    t.string "name"
+    t.string "uid"
+    t.integer "score"
+  end
+
   create_table "settings", force: :cascade do |t|
     t.string "uid"
     t.integer "num_decks"

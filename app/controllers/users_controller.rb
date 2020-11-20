@@ -34,7 +34,28 @@ class UsersController < ApplicationController
   end
 
   def increment_score
-    @increment_score = 1
+    @increment_score = 0
+    puts("in method")
+    if current_user == nil
+      flash[:notice] = "You are not logged in, Must log in to view your cards"
+    else
+      # if userid present in Score: update  the score in Score table
+      #    else: create a new instance of the score with the increment value
+      #
+      @increment_score = @increment_score + 1
+      if Score.exists?(name: current_user.name)
+        scoreData = Score
+        scoreUpdate = scoreData.find_by(name: current_user.name)
+        scoreUpdate.update(score: @increment_score)
+        scoreData.after_save
+      else
+        newScore = Score.new
+        newScore.uid = current_user.id
+        newScore.name = current_user.name
+        newScore.score = @increment_score
+        newScore.save
+      end
+    end
     redirect_to users_show_path
   end
 

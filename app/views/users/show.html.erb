@@ -36,8 +36,15 @@
 <% end  %>
 
 
-<%= button_to '+', users_increment_score_path %>
-<%= @increment_score %>
+<%= form_tag users_increment_score_path do %>
+  <%= submit_tag '+' %>
+  <% if @current_user %>
+    <p>
+      score
+    </p>
+  <% end %>
+<% end %>
+
 
 
 <%= link_to 'Return to Discard Deck', cards_path %>
