@@ -1,16 +1,19 @@
 <h1>User Hand</h1>
+<div>
+  <% if @current_user %>
+    Signed in as <%= @current_user.name %>
+    <%= link_to 'sign out', signout_path %>
+  <% end %>
+</div>
+
 <% if flash[:notice] %>
   <%= flash[:notice] %>
 <% end %>
 
-<% if @current_user %>
-  Signed in as <%= @current_user.name %>
-  <%= link_to 'sign out', signout_path %>
-<% end %>
-
 <%= button_to 'Draw Card', users_draw_path %>
 
-<%= form_tag users_discard_path do %>
+<%= form_with url: users_update_path do |f| %>
+
   <table>
     <thead>
     <tr>
@@ -25,15 +28,17 @@
             <%= card[:card_value] + ' of ' + card[:card_suit] %>
           </td>
           <td>
-            <%= check_box_tag("discard_card[#{card[:id]}]", "1", false) %>
+            <%= check_box_tag("selected_card[#{card[:id]}]", "1", false) %>
           </td>
         </tr>
       <% end %>
     <% end %>
     </tbody>
   </table>
-  <%= submit_tag 'Discard' %>
 <% end  %>
 
-<%= link_to 'Return to Discard Deck', cards_path %>
+<div>
+  <%= link_to 'Return to Discard Deck', cards_path %>
+</div>
+
 <%= link_to 'Return to Deck', cards_path %>
