@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     if current_user == nil
       redirect_to cards_path, notice: "You are not logged in, Must log in to view your cards"
     else
-      @current_user_score = Score.find_by(name: current_user.name)
+      @current_user_score = Score.find_by(email: current_user.email)
       @hand_cards = Card.where(pile_id: current_user.id).sort_by{ |card| card[:card_suit]}
     end
   end
@@ -34,42 +34,48 @@ class UsersController < ApplicationController
     redirect_to users_show_path
   end
 
+
   def increment_score
-      if Score.exists?(name: current_user.name)
-        scoreUpdate = Score.find_by(name: current_user.name)
-        score = scoreUpdate[:score]
+    if current_user == nil
+      flash[:notice] = "You are not logged in, Must log in to view your cards"
+    else
+      if Score.exists?(email: current_user.email)
+        puts("in method")
+        score_update = Score.find_by(email: current_user.email)
+        score = score_update[:score]
         score += 10
-        scoreUpdate.update(score: score)
+        score_update.update(score: score)
       else
-        newScore = Score.new
-        newScore.uid = current_user.id
-        newScore.name = current_user.name
-        newScore.score = @current_user_score
+        new_score = Score.new
+        new_score.email = current_user.email
+        new_score.name = current_user.name
         @current_user_score = 0
-        newScore.save!
+        new_score.score = @current_user_score
+        new_score.save!
       end
+    end
     redirect_to users_show_path
   end
 
   def decrement_score
-    if Score.exists?(name: current_user.name)
-      scoreUpdate = Score.find_by(name: current_user.name)
-      score = scoreUpdate[:score]
+    if Score.exists?(email: current_user.email)
+      score_update = Score.find_by(email: current_user.email)
+      score = score_update[:score]
       score -= 10
       if score < 0
         score = 0
         flash[:warning] = "Score can not be decremented anymore!\n"
       end
-      scoreUpdate.update(score: score)
+      score_update.update(score: score)
     else
-      newScore = Score.new
-      newScore.uid = current_user.id
-      newScore.name = current_user.name
-      newScore.score = @current_user_score
+      new_score = Score.new
+      new_score.email = current_user.email
+      new_score.name = current_user.name
       @current_user_score = 0
-      newScore.save!
+      new_score.score = @current_user_score
+      new_score.save!
     end
     redirect_to users_show_path
   end
-end
 
+end
