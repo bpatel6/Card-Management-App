@@ -1,22 +1,26 @@
 <h1>Game Coming Soon</h1>
+<div>
+  <% if current_user %>
+    Signed in as <%= current_user.name %>
+    <%= link_to 'sign out', signout_path %>
+  <% else %>
+    <%= link_to 'sign in', root_path %>
+  <% end %>
+</div>
+
 <% if flash[:notice] %>
   <%= flash[:notice] %>
 <% end %>
 
-<% if current_user %>
-  Signed in as <%= current_user.name %>
-  <%= link_to 'sign out', signout_path %>
-<% else %>
-  <%= link_to 'sign in', root_path %>
-<% end %>
-
 <%= button_to 'My Card', users_show_path, method: :get%>
 
-<%= form_tag cards_deal_all_path, method: :post do %>
-  <%= label :num_cards, 'Number of Cards To Deal to All Players' %>
-  <%= text_field_tag :num_cards, params[:num_cards] %>
-  <%= submit_tag "Deal Cards", name: cards_deal_all_path %>
-<% end %>
+<div>
+  <%= form_tag cards_deal_all_path, method: :post do %>
+    <%= label :num_cards, 'Number of Cards To Deal to All Players' %>
+    <%= text_field_tag :num_cards, params[:num_cards] %>
+    <%= submit_tag "Deal Cards", name: cards_deal_all_path %>
+  <% end %>
+</div>
 
 <h2>Deck</h2>
 <table>
