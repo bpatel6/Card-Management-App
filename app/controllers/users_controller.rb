@@ -47,6 +47,18 @@ class UsersController < ApplicationController
     redirect_to users_show_path
   end
 
-
+  def send_to_player(player)
+    if params[:selected_card].present?
+      params[:selected_card].keys.each do |card|
+        selected_card = Card.find_by_id(card)
+        selected_card.update(pile_id: player)
+      end
+      user = User.find_by_id(player)
+      flash[:notice] = "Card sent to #{user[:name]} successfully!"
+    else
+      flash[:notice] = 'No card selected'
+    end
+    redirect_to users_show_path
+  end
 
 end
