@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_221900) do
 
   create_table "scores", force: :cascade do |t|
     t.string "name"
-    t.string "uid"
+    t.string "email"
     t.integer "score"
   end
 
