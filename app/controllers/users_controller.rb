@@ -50,5 +50,22 @@ class UsersController < ApplicationController
       end
     redirect_to users_show_path
   end
+
+  def decrement_score
+    if Score.exists?(name: current_user.name)
+      scoreUpdate = Score.find_by(name: current_user.name)
+      score = scoreUpdate[:score]
+      score -= 10
+      scoreUpdate.update(score: score)
+    else
+      newScore = Score.new
+      newScore.uid = current_user.id
+      newScore.name = current_user.name
+      newScore.score = @current_user_score
+      @current_user_score = 0
+      newScore.save!
+    end
+    redirect_to users_show_path
+  end
 end
 
