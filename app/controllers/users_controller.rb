@@ -40,18 +40,10 @@ class UsersController < ApplicationController
       flash[:notice] = "You are not logged in, Must log in to view your cards"
     else
       if Score.exists?(email: current_user.email)
-        puts("in method")
         score_update = Score.find_by(email: current_user.email)
         score = score_update[:score]
         score += 10
         score_update.update(score: score)
-      else
-        new_score = Score.new
-        new_score.email = current_user.email
-        new_score.name = current_user.name
-        @current_user_score = 0
-        new_score.score = @current_user_score
-        new_score.save!
       end
     end
     redirect_to users_show_path
@@ -67,13 +59,6 @@ class UsersController < ApplicationController
         flash[:warning] = "Score can not be decremented anymore!\n"
       end
       score_update.update(score: score)
-    else
-      new_score = Score.new
-      new_score.email = current_user.email
-      new_score.name = current_user.name
-      @current_user_score = 0
-      new_score.score = @current_user_score
-      new_score.save!
     end
     redirect_to users_show_path
   end
