@@ -13,7 +13,7 @@
 <%= button_to 'Draw Card', users_draw_path %>
 
 <%= form_with url: users_update_path do |f| %>
-  <%= f.submit "Discard selected card" %>
+  <%= f.submit "Discard" %>
   <div>
     <label> Send selected cards to: </label>
     <%= f.select :player_id, User.where.not(id: current_user.id).collect{ |p| [p.name, p.id]}, include_blank: true %>
