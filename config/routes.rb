@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get 'users/show'
   post 'users/draw'
   post 'cards/deal_all'
-  post 'users/discard'
+  post 'users/update'
+
 
   resources :settings
   root :to => redirect('/settings')
