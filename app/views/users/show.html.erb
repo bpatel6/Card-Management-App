@@ -36,10 +36,7 @@
 <% end  %>
 
 <%= button_to '+', users_increment_score_path %>
-<p>
-  <%= @current_user_score[:score] %>
-</p>
-
+ <%= @current_user_score[:score] %>
 <%= button_to '-', users_decrement_score_path %>
 
 
