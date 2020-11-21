@@ -1,12 +1,20 @@
 <h1>User Hand</h1>
-<% if flash[:notice] %>
-  <%= flash[:notice] %>
+
+<div>
+  <% if @current_user %>
+    Signed in as <%= @current_user.name %>
+    <%= link_to 'sign out', signout_path %>
+  <% end %>
+</div>
+
+  <% if flash[:notice] %>
+    <%= flash[:notice] %>
+  <% else %>
+    <%= flash[:warning] %>
 <% end %>
 
-<% if @current_user %>
-  Signed in as <%= @current_user.name %>
-  <%= link_to 'sign out', signout_path %>
-<% end %>
+
+
 
 <%= button_to 'Draw Card', users_draw_path %>
 
