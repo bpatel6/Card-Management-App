@@ -43,6 +43,21 @@
 <% end  %>
 
 <div>
+  <h3>Alice's Hand (for testing only)</h3>
+  <table>
+    <tbody>
+    <% Card.where(pile_id: 2).each do |card| %>
+      <tr>
+        <td>
+          <%= card[:card_value] + ' of ' + card[:card_suit] %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div>
   <%= link_to 'Return to Discard Deck', cards_path %>
 </div>
 
