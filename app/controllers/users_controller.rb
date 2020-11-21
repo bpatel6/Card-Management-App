@@ -54,7 +54,7 @@ class UsersController < ApplicationController
       score_update = Score.find_by(email: current_user.email)
       score = score_update[:score]
       score -= 10
-      if score < 0
+      if score.negative?
         score = 0
         flash[:warning] = "Score can not be decremented anymore!\n"
       end
