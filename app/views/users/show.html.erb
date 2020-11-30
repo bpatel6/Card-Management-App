@@ -1,16 +1,23 @@
 <h1>User Hand</h1>
-<% if flash[:notice] %>
-  <%= flash[:notice] %>
+
+<div>
+  <% if @current_user %>
+    Signed in as <%= @current_user.name %>
+    <%= link_to 'sign out', signout_path %>
+  <% end %>
+</div>
+
+  <% if flash[:notice] %>
+    <%= flash[:notice] %>
+  <% else %>
+    <%= flash[:warning] %>
 <% end %>
 
-<% if @current_user %>
-  Signed in as <%= @current_user.name %>
-  <%= link_to 'sign out', signout_path %>
-<% end %>
 
 <%= button_to 'Draw Card', users_draw_path %>
 
 <%= form_tag users_discard_path do %>
+  <%= submit_tag 'Discard' %>
   <table>
     <thead>
     <tr>
@@ -32,8 +39,18 @@
     <% end %>
     </tbody>
   </table>
-  <%= submit_tag 'Discard' %>
 <% end  %>
+
+<div>
+  <% if @current_user %>
+    <%= button_to '+', users_increment_score_path %>
+    <%= @current_user_score[:score] %>
+    <%= button_to '-', users_decrement_score_path %>
+  <% end %>
+</div>
+
+
+
 
 <%= link_to 'Return to Discard Deck', cards_path %>
 <%= link_to 'Return to Deck', cards_path %>

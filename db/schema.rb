@@ -11,7 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 ActiveRecord::Schema.define(version: 2020_11_15_221900) do
 
-
   create_table "cards", force: :cascade do |t|
     t.string "card_value"
     t.string "card_suit"
@@ -23,6 +22,12 @@ ActiveRecord::Schema.define(version: 2020_11_15_221900) do
     t.integer "num_decks"
     t.string "num_players"
     t.string "deck_settings"
+
+  create_table "scores", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.integer "score"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
