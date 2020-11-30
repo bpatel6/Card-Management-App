@@ -75,7 +75,15 @@
 <br>
 
 <div>
-  <%= link_to 'Return to Discard Deck', cards_path %>
+  <% if @current_user %>
+    <%= button_to '+', users_increment_score_path %>
+    <%= @current_user_score[:score] %>
+    <%= button_to '-', users_decrement_score_path %>
+  <% end %>
 </div>
 
-<%= link_to 'Return to Deck', cards_path %>
+<div>
+  <%= link_to 'Return to Discard Deck', cards_path %>
+  <%= link_to 'Return to Deck', cards_path %>
+</div>
+

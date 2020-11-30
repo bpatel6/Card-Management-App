@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     if current_user == nil
       redirect_to cards_path, notice: "You are not logged in, Must log in to view your cards"
     else
+      @current_user_score = Score.find_by(email: current_user.email)
       @hand_cards = Card.where(pile_id: current_user.id).sort_by{ |card| card[:card_suit]}
     end
   end
@@ -57,6 +58,33 @@ class UsersController < ApplicationController
       flash[:notice] = "Card sent to #{user[:name]} successfully!"
     else
       flash[:notice] = 'No card selected'
+    end
+  end
+
+  def increment_score
+    if current_user == nil
+      flash[:notice] = "You are not logged in, Must log in to view your cards"
+    else
+      if Score.exists?(email: current_user.email)
+        score_update = Score.find_by(email: current_user.email)
+        score = score_update[:score]
+        score += 10
+        score_update.update(score: score)
+      end
+    end
+    redirect_to users_show_path
+  end
+
+  def decrement_score
+    if Score.exists?(email: current_user.email)
+      score_update = Score.find_by(email: current_user.email)
+      score = score_update[:score]
+      score -= 10
+      if score.negative?
+        score = 0
+        flash[:warning] = "Score can not be decremented anymore!\n"
+      end
+      score_update.update(score: score)
     end
     redirect_to users_show_path
   end
