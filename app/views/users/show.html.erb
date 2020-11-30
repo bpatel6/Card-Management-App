@@ -1,5 +1,4 @@
 <h1>User Hand</h1>
-
 <div>
   <% if @current_user %>
     Signed in as <%= @current_user.name %>
@@ -7,17 +6,19 @@
   <% end %>
 </div>
 
-  <% if flash[:notice] %>
-    <%= flash[:notice] %>
-  <% else %>
-    <%= flash[:warning] %>
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
 <% end %>
-
 
 <%= button_to 'Draw Card', users_draw_path %>
 
-<%= form_tag users_discard_path do %>
-  <%= submit_tag 'Discard' %>
+<%= form_with url: users_update_path do |f| %>
+  <%= f.submit "Discard" %>
+  <div>
+    <label> Send selected cards to: </label>
+    <%= f.select :player_id, User.where.not(id: current_user.id).collect{ |p| [p.name, p.id]}, include_blank: true %>
+    <%= f.submit "Send" %>
+  </div>
   <table>
     <thead>
     <tr>
@@ -32,7 +33,7 @@
             <%= card[:card_value] + ' of ' + card[:card_suit] %>
           </td>
           <td>
-            <%= check_box_tag("discard_card[#{card[:id]}]", "1", false) %>
+            <%= check_box_tag("selected_card[#{card[:id]}]", "1", false) %>
           </td>
         </tr>
       <% end %>
@@ -42,6 +43,38 @@
 <% end  %>
 
 <div>
+  <h3>Alice's Hand (for testing only)</h3>
+  <table>
+    <tbody>
+    <% Card.where(pile_id: 2).each do |card| %>
+      <tr>
+        <td>
+          <%= card[:card_value] + ' of ' + card[:card_suit] %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <h3>Bob's Hand (for testing only)</h3>
+  <table>
+    <tbody>
+    <% Card.where(pile_id: 3).each do |card| %>
+      <tr>
+        <td>
+          <%= card[:card_value] + ' of ' + card[:card_suit] %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<div>
   <% if @current_user %>
     <%= button_to '+', users_increment_score_path %>
     <%= @current_user_score[:score] %>
@@ -49,8 +82,8 @@
   <% end %>
 </div>
 
+<div>
+  <%= link_to 'Return to Discard Deck', cards_path %>
+  <%= link_to 'Return to Deck', cards_path %>
+</div>
 
-
-
-<%= link_to 'Return to Discard Deck', cards_path %>
-<%= link_to 'Return to Deck', cards_path %>

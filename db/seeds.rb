@@ -13,6 +13,11 @@ cards=[{:card_value=>'1',:card_suit=>'Spades',:pile_id=>0},
        {:card_value=>'J',:card_suit=>'Hearts',:pile_id=>0},
        {:card_value=>'6',:card_suit=>'Diamonds',:pile_id=>0}]
 
+users = [{:name=>'Alice', :provider=>'SELT', :uid=>'1234', :email=>'alice@gmail.com', :encrypted_password=>'null', :session_token=>SecureRandom.base64},
+         {:name=>'Bob', :provider=>'SELT', :uid=>'7007', :email=>'bob@gmail.com', :encrypted_password=>'null', :session_token=>SecureRandom.base64}]
+
 cards.each do |card|
   Card.create!(card)
 end
+
+users.each { |user| User.create!(user) }

@@ -21,11 +21,25 @@ class UsersController < ApplicationController
     redirect_to users_show_path
   end
 
+  def update
+    if params[:commit] == "Discard"
+      discard
+    elsif params[:commit] == "Send"
+      if params[:player_id].empty?
+        flash[:notice] = 'Select a player'
+        redirect_to users_show_path
+      else
+        player = params[:player_id]
+        send_to_player(player)
+      end
+    end
+  end
+
   def discard
-    if params[:discard_card].present?
-      params[:discard_card].keys.each do |card|
-        discard_card = Card.find_by_id(card)
-        discard_card.update(pile_id: 100)
+    if params[:selected_card].present?
+      params[:selected_card].keys.each do |card|
+        selected_card = Card.find_by_id(card)
+        selected_card.update(pile_id: 100)
       end
       flash[:notice] = 'Card discarded successfully!'
     else
@@ -34,6 +48,18 @@ class UsersController < ApplicationController
     redirect_to users_show_path
   end
 
+  def send_to_player(player)
+    if params[:selected_card].present?
+      params[:selected_card].keys.each do |card|
+        selected_card = Card.find_by_id(card)
+        selected_card.update(pile_id: player)
+      end
+      user = User.find_by_id(player)
+      flash[:notice] = "Card sent to #{user[:name]} successfully!"
+    else
+      flash[:notice] = 'No card selected'
+    end
+  end
 
   def increment_score
     if current_user == nil
