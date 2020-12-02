@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_221900) do
     t.integer "num_decks"
     t.string "num_players"
     t.string "deck_settings"
+  end
 
   create_table "scores", force: :cascade do |t|
     t.string "name"
