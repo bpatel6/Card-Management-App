@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :provider
       t.string :uid
+      t.integer :account_id
       t.string :email
       t.string :encrypted_password
       t.string :session_token

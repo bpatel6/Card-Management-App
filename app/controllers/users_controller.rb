@@ -5,7 +5,7 @@ class UsersController < ApplicationController
       redirect_to cards_path, notice: "You are not logged in, Must log in to view your cards"
     else
       @current_user_score = Score.find_by(email: current_user.email)
-      @hand_cards = Card.where(pile_id: current_user.id).sort_by{ |card| card[:card_suit]}
+      @hand_cards = Card.where(pile_id: current_user.account_id).sort_by{ |card| card[:card_suit]}
     end
   end
 
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if card.nil?
       flash[:notice] = 'No card available in the deck'
     else
-      card.update(pile_id: current_user.id)
+      card.update(pile_id: current_user.account_id)
       flash[:notice] = "You got #{card.card_value} of #{card.card_suit}"
     end
     redirect_to users_show_path
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
         flash[:notice] = 'Select a player'
         redirect_to users_show_path
       else
-        player = params[:player_id]
+        player = params[:player_id].to_i
         send_to_player(player)
       end
     end
@@ -54,11 +54,12 @@ class UsersController < ApplicationController
         selected_card = Card.find_by_id(card)
         selected_card.update(pile_id: player)
       end
-      user = User.find_by_id(player)
+      user = User.find_by_account_id(player)
       flash[:notice] = "Card sent to #{user[:name]} successfully!"
     else
       flash[:notice] = 'No card selected'
     end
+    redirect_to users_show_path
   end
 
   def increment_score
