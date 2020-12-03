@@ -26,3 +26,14 @@
   background-color: #b8b8b8;
   border: none;
 }
+
+.btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.btn:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
