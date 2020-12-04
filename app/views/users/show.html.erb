@@ -5,43 +5,12 @@
     <%= link_to 'sign out', signout_path %>
   <% end %>
 </div>
-
-<% if flash[:notice] %>
-  <%= flash[:notice] %>
-<% end %>
-
-<%= button_to 'Draw Card', users_draw_path %>
-
-<%= form_with url: users_update_path do |f| %>
-  <%= f.submit "Discard" %>
-  <div>
-    <label> Send selected cards to: </label>
-    <%= f.select :player_id, User.where.not(account_id: current_user.account_id).collect{ |p| [p.name, p.account_id]}, include_blank: true %>
-    <%= f.submit "Send" %>
-  </div>
-  <table>
-    <thead>
-    <tr>
-      <th>Card</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% if @hand_cards != nil %>
-      <% @hand_cards.each do |card| %>
-        <tr>
-          <td>
-            <%= card[:card_value] + ' of ' + card[:card_suit] %>
-          </td>
-          <td>
-            <%= check_box_tag("selected_card[#{card[:id]}]", "1", false) %>
-          </td>
-        </tr>
-      <% end %>
-    <% end %>
-    </tbody>
-  </table>
-<% end  %>
-
+<div>
+  <label>Session Code: </label>
+  <%= current_user[:active_session] %>
+</div>
+<br>
+<%= render_async user_hand_path, interval: 5000 %>
 <div>
   <h3>Alice's Hand (for testing only)</h3>
   <table>
