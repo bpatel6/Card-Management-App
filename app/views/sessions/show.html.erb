@@ -1,0 +1,20 @@
+<div>
+  <% if current_user %>
+    Signed in as <%= current_user.name %>
+    <%= link_to 'sign out', signout_path %>
+  <% else %>
+    <%= link_to 'sign in', root_path %>
+  <% end %>
+</div>
+
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+
+<%= button_to "Create Session", sessions_createSession_path %>
+
+<%= form_tag sessions_joinSession_path, method: :post do %>
+  <label>Enter session code</label>
+  <%= text_field_tag :sessionCode %>
+  <%= submit_tag 'Join' %>
+<% end %>
