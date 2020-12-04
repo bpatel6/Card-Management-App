@@ -1,11 +1,17 @@
 class UsersController < ApplicationController
 
+  def user_hand
+    #puts(current_user.account_id)
+    @hand_cards = Card.where(pile_id: current_user.account_id).sort_by{ |card| card[:card_suit] }
+    render partial: "user_hand"
+  end
+
   def show
     if current_user == nil
       redirect_to cards_path, notice: "You are not logged in, Must log in to view your cards"
     else
+      @session_id = Settings.find_by_uid(current_user.uid)
       @current_user_score = Score.find_by(email: current_user.email)
-      @hand_cards = Card.where(pile_id: current_user.account_id).sort_by{ |card| card[:card_suit]}
     end
   end
 
@@ -18,7 +24,7 @@ class UsersController < ApplicationController
       card.update(pile_id: current_user.account_id)
       flash[:notice] = "You got #{card.card_value} of #{card.card_suit}"
     end
-    redirect_to users_show_path
+    #redirect_to users_show_path
   end
 
   def update
@@ -27,7 +33,7 @@ class UsersController < ApplicationController
     elsif params[:commit] == "Send"
       if params[:player_id].empty?
         flash[:notice] = 'Select a player'
-        redirect_to users_show_path
+        #redirect_to users_show_path
       else
         player = params[:player_id].to_i
         send_to_player(player)
@@ -45,7 +51,7 @@ class UsersController < ApplicationController
     else
       flash[:notice] = 'No card selected'
     end
-    redirect_to users_show_path
+    #redirect_to users_show_path
   end
 
   def send_to_player(player)
@@ -59,7 +65,7 @@ class UsersController < ApplicationController
     else
       flash[:notice] = 'No card selected'
     end
-    redirect_to users_show_path
+    #redirect_to users_show_path
   end
 
   def increment_score
@@ -73,7 +79,7 @@ class UsersController < ApplicationController
         score_update.update(score: score)
       end
     end
-    redirect_to users_show_path
+    #redirect_to users_show_path
   end
 
   def decrement_score
@@ -87,7 +93,7 @@ class UsersController < ApplicationController
       end
       score_update.update(score: score)
     end
-    redirect_to users_show_path
+    #redirect_to users_show_path
   end
 
 end
