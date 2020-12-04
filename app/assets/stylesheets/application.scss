@@ -10,6 +10,37 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+
+.container-fluid {
+  padding: 25px;
+  background-color: #a8dbe6;
+  margin-bottom: 20px;
+  border-bottom: 5px solid #7c7c7c;
+}
+
+.btn {
+  background-color: #b8b8b8;
+  border: none;
+}
+
+.btn:hover {
+  background-color: black;
+  color: white;
+}
+
+.btn:focus {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.flash-message {
+  background-color: #cd5a5a;
+  margin-bottom: 20px;
+  padding: 5px;
+  color: white;
+}
+
