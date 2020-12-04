@@ -37,7 +37,31 @@ class SessionsController < ApplicationController
     setting.save!
     redirect_to users_show_path, notice: 'Session created successfully, Share session code with others to join'
   end
-  
+
+  def joinSession
+    if params[:sessionCode].present?
+      code = params[:sessionCode]
+      total_user = User.where(active_session: code)
+      setting = Settings.find_by_session_id(code)
+      if setting.present?
+        if total_user.length <= setting.num_players
+          current_user[:active_session] = code
+          current_user[:role] = 'player'
+          current_user.save!
+          redirect_to users_show_path, notice: "You joined the session #{code}"
+        else
+          flash[:notice] = 'no such session exist. try again or create new'
+          redirect_to sessions_show_path
+        end
+      else
+        flash[:notice] = 'no such session exist. try again or create new'
+        redirect_to sessions_show_path
+      end
+    else
+      redirect_to sessions_show_path, notice: 'invalid input. check session code and try again'
+    end
+  end
+
   def destroy
     cards = Card.all
     cards.each do |card|
