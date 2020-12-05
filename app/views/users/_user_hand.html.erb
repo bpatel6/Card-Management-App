@@ -44,6 +44,9 @@
 <div>
   <h3> ScoreBoard </h3>
   <% User.where(active_session: current_user.active_session).each do |user| %>
-   
+    <div>
+      <%= user.name %>
+      <%= Score.find_by(email: user.email)[:score] %>
+    </div>
   <% end %>
 </div>
