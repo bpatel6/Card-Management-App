@@ -8,6 +8,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :encrypted_password
       t.string :session_token
+      t.string :role
+      t.integer :active_session
     end
   end
 end

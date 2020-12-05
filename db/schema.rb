@@ -25,11 +25,11 @@ ActiveRecord::Schema.define(version: 2020_11_21_033613) do
   end
 
   create_table "settings", force: :cascade do |t|
+    t.integer "session_id"
     t.string "uid"
     t.integer "num_decks"
-    t.string "num_players"
+    t.integer "num_players"
     t.string "deck_settings"
-    t.string "session_token"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2020_11_21_033613) do
     t.string "email"
     t.string "encrypted_password"
     t.string "session_token"
+    t.string "role"
+    t.integer "active_session"
   end
 
 end
