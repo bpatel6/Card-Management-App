@@ -15,10 +15,10 @@
     <% if @hand_cards != nil %>
       <% @hand_cards.each do |card| %>
         <tr>
-          <td>
+          <td style="padding: 15px">
             <%= card[:card_value] + ' of ' + card[:card_suit] %>
           </td>
-          <td>
+          <td style="padding: 15px">
             <%= check_box_tag("selected_card[#{card[:id]}]", "1", false) %>
           </td>
         </tr>
