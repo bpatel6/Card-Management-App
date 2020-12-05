@@ -31,3 +31,13 @@
     </tbody>
   </table>
 <% end  %>
+
+
+<div>
+  <% if current_user %>
+    <%= button_to '+', users_increment_score_path %>
+    <%= current_user_score[:score] %>
+    <%= button_to '-', users_decrement_score_path %>
+  <% end %>
+</div>
+
