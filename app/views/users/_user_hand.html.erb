@@ -1,5 +1,7 @@
 <% if flash[:notice] %>
-  <%= flash[:notice] %>
+  <div class="flash-message rounded">
+    <%= flash[:notice] %>
+  </div>
 <% end %>
 <%= button_to 'Draw Card', users_draw_path %>
 <%= form_with url: users_update_path do |f| %>
