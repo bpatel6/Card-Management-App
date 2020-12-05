@@ -1,28 +1,24 @@
 <% if flash[:notice] %>
-  <%= flash[:notice] %>
-<% end %>
-<%= button_to 'Draw Card', users_draw_path %>
-<%= form_with url: users_update_path do |f| %>
-  <%= f.submit "Discard" %>
-  <div>
-    <label> Send selected cards to: </label>
-    <%= f.select :player_id, User.where.not(account_id: current_user.account_id).where(active_session: current_user.active_session).collect{ |p| [p.name, p.account_id]}, include_blank: true %>
-    <%= f.submit "Send" %>
+  <div class="flash-message rounded">
+    <%= flash[:notice] %>
   </div>
-  <table>
+<% end %>
+<%= button_to 'Draw Card', users_draw_path, class: 'btn' %>
+<%= form_with url: users_update_path do |f| %>
+  <table class="table-of-cards rounded">
     <thead>
     <tr>
-      <th>Card</th>
+      <th style="padding: 15px">List of Your Cards</th>
     </tr>
     </thead>
     <tbody>
     <% if @hand_cards != nil %>
       <% @hand_cards.each do |card| %>
         <tr>
-          <td>
+          <td style="padding: 15px">
             <%= card[:card_value] + ' of ' + card[:card_suit] %>
           </td>
-          <td>
+          <td style="padding: 15px">
             <%= check_box_tag("selected_card[#{card[:id]}]", "1", false) %>
           </td>
         </tr>
@@ -30,13 +26,22 @@
     <% end %>
     </tbody>
   </table>
+  <h6>Choose which action to take with selected cards:</h6>
+  <%= f.submit "Discard", class: 'btn' %>
+  <h6 style="padding-top: 15px"> -- OR -- </h6>
+  <div>
+    <label> Send selected cards to: </label>
+    <%= f.select :player_id, User.where.not(account_id: current_user.account_id).where(active_session: current_user.active_session).collect{ |p| [p.name, p.account_id]}, include_blank: true %>
+    <%= f.submit "Send", class: 'btn' %>
+  </div>
 <% end  %>
 
 
 <div>
-  <% if current_user %>
+  <div class="row"> <h6>Add to Your Score:</h6> </div>
+  <% if @current_user %>
     <%= button_to '+', users_increment_score_path %>
-    <%= current_user_score[:score] %>
+    <%= @current_user_score[:score] %>
     <%= button_to '-', users_decrement_score_path %>
   <% end %>
 </div>
@@ -50,3 +55,4 @@
     </div>
   <% end %>
 </div>
+
