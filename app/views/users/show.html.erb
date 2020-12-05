@@ -16,7 +16,19 @@
   <br>
   <div class="row">
     <div class="col-6"><%= render_async user_hand_path, interval: 5000 %></div>
-    <div class="col-6"><h5>Stats for Other Players:</h5></div>
+    <div class="col-6">
+      <h5>Stats for Other Players:</h5>
+      <div class="row">
+        <p class="col-6">Number of other players:</p>
+        <p class="col-6"><%= User.where.not(account_id: @current_user.account_id).count%></p>
+      </div>
+      <%# User.where.not(account_id: @current_user.account_id).each do |user| %>
+        <%#= user.name %>
+<!--        <br>-->
+        <%# end %>
+
+      <%#= User.where.not(account_id: @current_user.account_id).count%>
+    </div>
   </div>
 <!--  <div>-->
 <!--    <h3>Alice's Hand (for testing only)</h3>-->
