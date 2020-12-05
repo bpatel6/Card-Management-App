@@ -1,59 +1,64 @@
-<h1>User Hand</h1>
-<div>
-  <% if @current_user %>
-    Signed in as <%= @current_user.name %>
-    <%= link_to 'sign out', signout_path %>
-  <% end %>
-</div>
-<div>
-  <label>Session Code: </label>
-  <%= current_user[:active_session] %>
-</div>
-<br>
-<%= render_async user_hand_path, interval: 5000 %>
-<div>
-  <h3>Alice's Hand (for testing only)</h3>
-  <table>
-    <tbody>
-    <% Card.where(pile_id: 1234).each do |card| %>
-      <tr>
-        <td>
-          <%= card[:card_value] + ' of ' + card[:card_suit] %>
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+<div class="container">
+  <div class="row align-middle">
+    <div class="col-6"> <h1>User Hand</h1> </div>
+    <div class="col-6 text-right">
+      <% if @current_user %>
+        Signed in as <%= @current_user.name %>
+        <%= link_to 'Sign Out', signout_path, class: 'btn' %>
+      <% end %>
+      <div>
+        <label>Session Code: </label>
+        <%= current_user[:active_session] %>
+      </div>
+    </div>
+  </div>
 
-<div>
-  <h3>Bob's Hand (for testing only)</h3>
-  <table>
-    <tbody>
-    <% Card.where(pile_id: 7007).each do |card| %>
-      <tr>
-        <td>
-          <%= card[:card_value] + ' of ' + card[:card_suit] %>
-        </td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
-
-<br>
-
-<div>
-  <% if @current_user %>
-    <%= button_to '+', users_increment_score_path %>
-    <%= @current_user_score[:score] %>
-    <%= button_to '-', users_decrement_score_path %>
-  <% end %>
-</div>
-
-<div>
-  <%= link_to 'Return to Discard Deck', cards_path %>
   <br>
-  <%= link_to 'Return to Deck', cards_path %>
+  <%= render_async user_hand_path, interval: 5000 %>
+<!--  <div>-->
+<!--    <h3>Alice's Hand (for testing only)</h3>-->
+<!--    <table>-->
+<!--      <tbody>-->
+      <%# Card.where(pile_id: 1234).each do |card| %>
+<!--        <tr>-->
+<!--          <td>-->
+            <%#= card[:card_value] + ' of ' + card[:card_suit] %>
+<!--          </td>-->
+<!--        </tr>-->
+      <%# end %>
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+
+<!--  <div>-->
+<!--    <h3>Bob's Hand (for testing only)</h3>-->
+<!--    <table>-->
+<!--      <tbody>-->
+      <%# Card.where(pile_id: 7007).each do |card| %>
+<!--        <tr>-->
+<!--          <td>-->
+            <%#= card[:card_value] + ' of ' + card[:card_suit] %>
+<!--          </td>-->
+<!--        </tr>-->
+      <%# end %>
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
+
+  <br>
+
+  <div>
+    <div class="row"> <h6>Add to Your Score:</h6> </div>
+    <% if @current_user %>
+      <%= button_to '+', users_increment_score_path %>
+      <%= @current_user_score[:score] %>
+      <%= button_to '-', users_decrement_score_path %>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <%= link_to 'Return to Decks', cards_path, class: 'btn' %>
+  </div>
+
 </div>
 
