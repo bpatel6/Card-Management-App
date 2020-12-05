@@ -22,43 +22,43 @@
         <p class="col-6">Number of other players:</p>
         <p class="col-6"><%= User.where.not(account_id: @current_user.account_id).count%></p>
       </div>
-      <%# User.where.not(account_id: @current_user.account_id).each do |user| %>
-        <%#= user.name %>
-<!--        <br>-->
-        <%# end %>
-
-      <%#= User.where.not(account_id: @current_user.account_id).count%>
+      <% User.where.not(account_id: @current_user.account_id).each do |user| %>
+        <div class="row">
+          <div class="col-6"> <%= user.name + "'s Number of Cards:" %></div>
+          <div class="col-6">6 cards</div>
+        </div>
+      <% end %>
     </div>
   </div>
-<!--  <div>-->
-<!--    <h3>Alice's Hand (for testing only)</h3>-->
-<!--    <table>-->
-<!--      <tbody>-->
-      <%# Card.where(pile_id: 1234).each do |card| %>
-<!--        <tr>-->
-<!--          <td>-->
-            <%#= card[:card_value] + ' of ' + card[:card_suit] %>
-<!--          </td>-->
-<!--        </tr>-->
-      <%# end %>
-<!--      </tbody>-->
-<!--    </table>-->
-<!--  </div>-->
+  <!--  <div>-->
+  <!--    <h3>Alice's Hand (for testing only)</h3>-->
+  <!--    <table>-->
+  <!--      <tbody>-->
+  <%# Card.where(pile_id: 1234).each do |card| %>
+  <!--        <tr>-->
+  <!--          <td>-->
+  <%#= card[:card_value] + ' of ' + card[:card_suit] %>
+  <!--          </td>-->
+  <!--        </tr>-->
+  <%# end %>
+  <!--      </tbody>-->
+  <!--    </table>-->
+  <!--  </div>-->
 
-<!--  <div>-->
-<!--    <h3>Bob's Hand (for testing only)</h3>-->
-<!--    <table>-->
-<!--      <tbody>-->
-      <%# Card.where(pile_id: 7007).each do |card| %>
-<!--        <tr>-->
-<!--          <td>-->
-            <%#= card[:card_value] + ' of ' + card[:card_suit] %>
-<!--          </td>-->
-<!--        </tr>-->
-      <%# end %>
-<!--      </tbody>-->
-<!--    </table>-->
-<!--  </div>-->
+  <!--  <div>-->
+  <!--    <h3>Bob's Hand (for testing only)</h3>-->
+  <!--    <table>-->
+  <!--      <tbody>-->
+  <%# Card.where(pile_id: 7007).each do |card| %>
+  <!--        <tr>-->
+  <!--          <td>-->
+  <%#= card[:card_value] + ' of ' + card[:card_suit] %>
+  <!--          </td>-->
+  <!--        </tr>-->
+  <%# end %>
+  <!--      </tbody>-->
+  <!--    </table>-->
+  <!--  </div>-->
 
   <br>
 
