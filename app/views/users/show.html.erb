@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row align-middle">
-    <div class="col-6"> <h1>User Hand</h1> </div>
+    <div class="col-6"> <h1>Player Center</h1> </div>
     <div class="col-6 text-right">
       <% if @current_user %>
         Signed in as <%= @current_user.name %>
@@ -14,7 +14,10 @@
   </div>
 
   <br>
-  <%= render_async user_hand_path, interval: 5000 %>
+  <div class="row">
+    <div class="col-6"><%= render_async user_hand_path, interval: 5000 %></div>
+    <div class="col-6"><h5>Stats for Other Players:</h5></div>
+  </div>
 <!--  <div>-->
 <!--    <h3>Alice's Hand (for testing only)</h3>-->
 <!--    <table>-->
