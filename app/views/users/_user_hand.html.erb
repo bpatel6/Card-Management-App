@@ -28,6 +28,7 @@
   </table>
   <h6>Choose which action to take with selected cards:</h6>
   <%= f.submit "Discard", class: 'btn' %>
+  <h6 style="padding-top: 15px"> -- OR -- </h6>
   <div>
     <label> Send selected cards to: </label>
     <%= f.select :player_id, User.where.not(account_id: current_user.account_id).where(active_session: current_user.active_session).collect{ |p| [p.name, p.account_id]}, include_blank: true %>
