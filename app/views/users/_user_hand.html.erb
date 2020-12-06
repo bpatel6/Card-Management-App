@@ -1,10 +1,5 @@
 <div class="row">
   <div class="col-6">
-    <% if flash[:notice] %>
-      <div class="flash-message rounded">
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
     <%= button_to 'Draw Card', users_draw_path, class: 'btn' %>
     <%= form_with url: users_update_path do |f| %>
       <table class="table-of-cards rounded">
@@ -22,7 +17,7 @@
                 <%#= card[:card_value] + ' of ' + card[:card_suit] %>
               </td>
               <td style="padding-right: 15px; padding-bottom: 15px;">
-                <%= check_box_tag("selected_card[#{card[:id]}]", "1", false) %>
+                <%= check_box_tag("selected_card[#{card[:id]}]", "1", false, class: 'checkbox') %>
               </td>
             </tr>
           <% end %>
@@ -75,11 +70,4 @@
   <% end %>
 </div>
 
-<script>
-  console.log('hi')
-  // var checkboxVals = JSON.parse(localStorage.getItem('checkboxVals')) || {};
-  // var $checkboxes = $("input[type='checkbox']").on("change", function() {
-  //     console.log("click checkbox!");
-  // })
-</script>
 
