@@ -30,32 +30,6 @@
 <!--    </table>-->
 <!--  </div>-->
 
-<!--  <div>-->
-<!--    <h3>Bob's Hand (for testing only)</h3>-->
-<!--    <table>-->
-<!--      <tbody>-->
-      <%# Card.where(pile_id: 7007).each do |card| %>
-<!--        <tr>-->
-<!--          <td>-->
-            <%#= card[:card_value] + ' of ' + card[:card_suit] %>
-<!--          </td>-->
-<!--        </tr>-->
-      <%# end %>
-<!--      </tbody>-->
-<!--    </table>-->
-<!--  </div>-->
-
-  <br>
-
-  <div>
-    <div class="row"> <h6>Add to Your Score:</h6> </div>
-    <% if @current_user %>
-      <%= button_to '+', users_increment_score_path %>
-      <%= @current_user_score[:score] %>
-      <%= button_to '-', users_decrement_score_path %>
-    <% end %>
-  </div>
-
   <div class="row">
     <%= link_to 'Return to Decks', cards_path, class: 'btn' %>
   </div>

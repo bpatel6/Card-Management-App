@@ -36,3 +36,24 @@
     <%= f.submit "Send", class: 'btn' %>
   </div>
 <% end  %>
+
+
+<div>
+  <div class="row"> <h6>Add to Your Score:</h6> </div>
+  <% if @current_user %>
+    <%= button_to '+', users_increment_score_path %>
+    <%= @current_user_score[:score] %>
+    <%= button_to '-', users_decrement_score_path %>
+  <% end %>
+</div>
+
+<div>
+  <h3> ScoreBoard </h3>
+  <% User.where(active_session: current_user.active_session).each do |user| %>
+    <div>
+      <%= user.name %>
+      <%= Score.find_by(email: user.email)[:score] %>
+    </div>
+  <% end %>
+</div>
+
