@@ -52,25 +52,25 @@
         <div class="col-6"> <%= Card.where(pile_id: user.account_id).count %></div>
       </div>
     <% end %>
+    <div class="row" style="padding-top: 15px;">
+      <h5> Scoreboard: </h5>
+      <% User.where(active_session: current_user.active_session).each do |user| %>
+        <div>
+          <%= user.name %>
+          <%= Score.find_by(email: user.email)[:score] %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
 
 <div>
-  <div class="row"> <h6>Add to Your Score:</h6> </div>
+  <div class="row"> <h6>Add 10 to Your Score:</h6> </div>
   <% if @current_user %>
-    <%= button_to '+', users_increment_score_path %>
-    <%= @current_user_score[:score] %>
-    <%= button_to '-', users_decrement_score_path %>
-  <% end %>
-</div>
-
-<div>
-  <h3> ScoreBoard </h3>
-  <% User.where(active_session: current_user.active_session).each do |user| %>
-    <div>
-      <%= user.name %>
-      <%= Score.find_by(email: user.email)[:score] %>
-    </div>
+    <%= button_to '+', users_increment_score_path, class: 'btn col-2'%>
+    <%#= @current_user_score[:score] %>
+    <div class="row"> <h6>Subtract 10 from Your Score:</h6> </div>
+    <%= button_to '-', users_decrement_score_path, class: 'btn col-2' %>
   <% end %>
 </div>
