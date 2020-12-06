@@ -14,17 +14,7 @@
   </div>
 
   <br>
-    <div><%= render_async user_hand_path, interval: 5000 %></div>
-  <br>
-
-  <div>
-    <div class="row"> <h6>Add to Your Score:</h6> </div>
-    <% if @current_user %>
-      <%= button_to '+', users_increment_score_path %>
-      <%= @current_user_score[:score] %>
-      <%= button_to '-', users_decrement_score_path %>
-    <% end %>
-  </div>
+  <%= render_async user_hand_path, interval: 5000 %>
 
   <div class="row">
     <%= link_to 'Return to Decks', cards_path, class: 'btn' %>
