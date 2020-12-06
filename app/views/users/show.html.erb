@@ -1,6 +1,7 @@
 
 
 <div class="container">
+  <div class="sticky-top border border-dark rounded col-12" style="background-color: white; padding: 25px;">
   <div class="row col-12 text-center">
     <h1>Player Center</h1>
   </div>
@@ -18,8 +19,8 @@
       </div>
     </div>
   </div>
+  </div>
 
-  <hr>
   <br>
   <%= render_async user_hand_path, toggle: { selector: '#perform-turn', event: :click, start:true}, interval: 2000%>
 
