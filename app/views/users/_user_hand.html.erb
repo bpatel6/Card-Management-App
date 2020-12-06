@@ -25,7 +25,7 @@
         </tbody>
       </table>
 
-      <h6>Choose which action to take with selected cards:</h6>
+      <h4>Choose which action to take with selected cards:</h4>
       <%= f.submit "Discard", class: 'btn' %>
       <h6 style="padding-top: 15px"> -- OR -- </h6>
       <div>
@@ -59,15 +59,17 @@
   </div>
 </div>
 
+<hr>
 
-<div>
-  <div class="row"> <h6>Add 10 to Your Score:</h6> </div>
+<div class="text-center">
+  <div class="row"> <h5>Add 10 to Your Score:</h5> </div>
   <% if @current_user %>
-    <%= button_to '+', users_increment_score_path, class: 'btn col-2'%>
+    <%= button_to '++++++++++', users_increment_score_path, class: 'btn col-2'%>
     <%#= @current_user_score[:score] %>
-    <div class="row"> <h6>Subtract 10 from Your Score:</h6> </div>
-    <%= button_to '-', users_decrement_score_path, class: 'btn col-2' %>
+    <div class="row"> <h5>Subtract 10 from Your Score:</h5> </div>
+    <%= button_to '----------', users_decrement_score_path, class: 'btn col-2' %>
   <% end %>
 </div>
+<hr>
 
 
