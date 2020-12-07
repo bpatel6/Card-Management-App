@@ -1,6 +1,13 @@
+
+
 <div class="container">
+  <div class="sticky-top border border-dark rounded col-12" style="background-color: white; padding: 25px;">
+  <div class="row col-12 text-center">
+    <h1>Player Center</h1>
+  </div>
+  <hr>
   <div class="row align-middle">
-    <div class="col-6"> <h1>User Hand</h1> </div>
+    <div class="col-6"><input type="button" id="perform-turn" value="PERFORM TURN" class="btn col-6" style="height: 100%; font-weight: bolder"/></div>
     <div class="col-6 text-right">
       <% if @current_user %>
         Signed in as <%= @current_user.name %>
@@ -12,23 +19,10 @@
       </div>
     </div>
   </div>
+  </div>
 
   <br>
-  <%= render_async user_hand_path, interval: 5000 %>
-<!--  <div>-->
-<!--    <h3>Alice's Hand (for testing only)</h3>-->
-<!--    <table>-->
-<!--      <tbody>-->
-      <%# Card.where(pile_id: 1234).each do |card| %>
-<!--        <tr>-->
-<!--          <td>-->
-            <%#= card[:card_value] + ' of ' + card[:card_suit] %>
-<!--          </td>-->
-<!--        </tr>-->
-      <%# end %>
-<!--      </tbody>-->
-<!--    </table>-->
-<!--  </div>-->
+  <%= render_async user_hand_path, toggle: { selector: '#perform-turn', event: :click, start:true}, interval: 2000%>
 
   <div class="row">
     <%= link_to 'Return to Decks', cards_path, class: 'btn' %>
@@ -36,3 +30,10 @@
 
 </div>
 
+<script>
+    var turnButton = document.getElementById('perform-turn')
+    turnButton.addEventListener('click', function() {
+        if (turnButton.value === 'PERFORM TURN') {turnButton.value = 'DONE WITH TURN'}
+        else {turnButton.value = "PERFORM TURN"}
+    })
+</script>
