@@ -1,5 +1,9 @@
 class CardsController < ApplicationController
 
+  def deckoverview
+    render partial: "deckoverview"
+  end
+
   def index
     @cards = Card.where(pile_id: 0)
     @discard_card = Card.where(pile_id: 100)
