@@ -23,6 +23,8 @@ class CardsController < ApplicationController
         # gets a random card
         if(deck.length==0)
           flash[:notice]= "The Deck is Out of Cards"
+          redirect_to users_show_path
+          return
         end
         card = deck[rand(deck.length)]
         # puts that random card in the current user's hand
@@ -33,6 +35,7 @@ class CardsController < ApplicationController
       # end
       flash[:notice] = "You dealt #{users.length*dealnum} cards"
     end
+
   redirect_to users_show_path
 
   end
