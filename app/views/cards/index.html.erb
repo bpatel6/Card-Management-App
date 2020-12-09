@@ -1,76 +1,86 @@
 <div class="container">
-<h1>Deck Overview</h1>
-<div>
-  <% if current_user %>
-    Signed in as <%= current_user.name %>
-    <%= link_to 'sign out', signout_path %>
-  <% else %>
-    <%= link_to 'sign in', root_path %>
-  <% end %>
-</div>
+  <div class="row text-center"> <h1>Deck Overview</h1> </div>
 
-<% if flash[:notice] %>
-  <%= flash[:notice] %>
-<% end %>
+  <hr>
 
-<%= button_to 'My Card', users_show_path, method: :get%>
+  <div class="row">
+    <div class="col-6">
+      <div>
+        <%= form_tag cards_deal_all_path, method: :post do %>
+          <%= label :num_cards, 'Number of Cards To Deal to All Players' %>
+          <%= text_field_tag :num_cards, params[:num_cards] %>
+          <%= submit_tag "Deal Cards", name: cards_deal_all_path %>
+        <% end %>
+      </div>
+    </div>
 
-<div>
-  <%= form_tag cards_deal_all_path, method: :post do %>
-    <%= label :num_cards, 'Number of Cards To Deal to All Players' %>
-    <%= text_field_tag :num_cards, params[:num_cards] %>
-    <%= submit_tag "Deal Cards", name: cards_deal_all_path %>
-  <% end %>
-</div>
+    <div class="col-6 text-right">
+      <div>
+        <% if current_user %>
+          Signed in as <%= current_user.name %>
+          <%= link_to 'sign out', signout_path %>
+        <% else %>
+          <%= link_to 'sign in', root_path %>
+        <% end %>
+      </div>
 
-<h2>Deck</h2>
-<table>
-  <thead>
-  <tr>
-    <th>Card</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% if @cards.present? %>
-    <% @cards.each do |card| %>
-      <tr>
-        <td>
-          <%= card[:card_value] + ' of ' + card[:card_suit] %>
-        </td>
-      </tr>
-    <% end %>
-  <% else %>
+      <% if flash[:notice] %>
+        <%= flash[:notice] %>
+      <% end %>
+
+      <%= button_to 'My Card', users_show_path, method: :get%>
+    </div>
+
+  </div>
+
+  <h2>Deck</h2>
+  <table>
+    <thead>
     <tr>
-      <td> Deck is empty </td>
+      <th>Card</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
-
-
-<h2>Discarded Deck</h2>
-<table>
-  <thead>
-  <tr>
-    <th>Cards</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% if @discard_card.present? %>
-    <% @discard_card.each do |card| %>
-      <tr>
-        <td>
-          <% if card[:pile_id] == 100 %>
+    </thead>
+    <tbody>
+    <% if @cards.present? %>
+      <% @cards.each do |card| %>
+        <tr>
+          <td>
             <%= card[:card_value] + ' of ' + card[:card_suit] %>
-          <% end %>
-        </td>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td> Deck is empty </td>
       </tr>
     <% end %>
-  <% else %>
+    </tbody>
+  </table>
+
+
+  <h2>Discarded Deck</h2>
+  <table>
+    <thead>
     <tr>
-      <td> Discard deck is empty </td>
+      <th>Cards</th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    <% if @discard_card.present? %>
+      <% @discard_card.each do |card| %>
+        <tr>
+          <td>
+            <% if card[:pile_id] == 100 %>
+              <%= card[:card_value] + ' of ' + card[:card_suit] %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td> Discard deck is empty </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
