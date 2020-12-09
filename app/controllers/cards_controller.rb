@@ -1,5 +1,11 @@
 class CardsController < ApplicationController
 
+  def deckoverview
+    #puts(current_user.account_id)
+    # @hand_cards = Card.where(pile_id: current_user.account_id).sort_by{ |card| card[:card_suit] }
+    render partial: "deckoverview"
+  end
+
   def index
     @cards = Card.where(pile_id: 0)
     @discard_card = Card.where(pile_id: 100)

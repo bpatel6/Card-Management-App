@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'sessions/joinSession'
 
   resources :cards
+  get :deckoverview, controller: :cards
   root to: redirect('/cards')
 
   resources :users

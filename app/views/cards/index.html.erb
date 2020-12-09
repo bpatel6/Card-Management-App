@@ -34,30 +34,34 @@
   </div>
 
   <div class="row">
+<!--    <div class="col-6">-->
+<!--      <h2>Draw Deck</h2>-->
+<!--      <table>-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--          <th>Card</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+        <%# if @cards.present? %>
+          <%# @cards.each do |card| %>
+<!--            <tr>-->
+<!--              <td>-->
+                <%#= card[:card_value] + ' of ' + card[:card_suit] %>
+<!--              </td>-->
+<!--            </tr>-->
+          <%# end %>
+        <%# else %>
+<!--          <tr>-->
+<!--            <td> Deck is empty </td>-->
+<!--          </tr>-->
+        <%# end %>
+<!--        </tbody>-->
+<!--      </table>-->
+<!--    </div>-->
+
     <div class="col-6">
-      <h2>Draw Deck</h2>
-      <table>
-        <thead>
-        <tr>
-          <th>Card</th>
-        </tr>
-        </thead>
-        <tbody>
-        <% if @cards.present? %>
-          <% @cards.each do |card| %>
-            <tr>
-              <td>
-                <%= card[:card_value] + ' of ' + card[:card_suit] %>
-              </td>
-            </tr>
-          <% end %>
-        <% else %>
-          <tr>
-            <td> Deck is empty </td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
+    <%= render_async deckoverview_path, interval: 2000 %>
     </div>
 
     <div class="col-6">
