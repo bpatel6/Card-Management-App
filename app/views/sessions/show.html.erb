@@ -9,7 +9,7 @@
     <div class="col-6">
       <h4>Choose whether to create a new session or join an existing one:</h4>
       <br>
-      <%= button_to "Create Session", sessions_createSession_path, class: 'btn' %>
+      <%= button_to "Create Session", settings_index_path, class: 'btn' %>
       <br>
       <%= form_tag sessions_joinSession_path, method: :post do %>
         <label>Enter session code</label>
@@ -17,7 +17,6 @@
         <%= submit_tag 'Join', class: 'btn' %>
       <% end %>
     </div>
-
     <div class="col-6 text-right">
       <% if current_user %>
         Signed in as <%= current_user.name %>
