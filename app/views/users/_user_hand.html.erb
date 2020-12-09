@@ -27,6 +27,7 @@
 
       <h4>Choose which action to take with selected cards:</h4>
       <%= f.submit "Discard", class: 'btn' %>
+      <%= f.submit "Toggle Visibility", class: 'btn' %>
       <h6 style="padding-top: 15px"> -- OR -- </h6>
       <div>
         <label> Send selected cards to: </label>
@@ -47,7 +48,7 @@
         <% @visible_cards.each do |card| %>
           <tr>
             <td style="padding-left: 15px; padding-bottom: 15px;">
-              <%= @visible_users.where(account_id: card[:pile_id])%>
+              <%= @visible_users.where(account_id: card[:pile_id]).pluck(:name)%>
             </td>
             <td style="padding-left: 15px; padding-bottom: 15px;">
               <%= image_tag(card[:card_value].to_s + card[:card_suit] + '.png', width: 100, height: 150) %>

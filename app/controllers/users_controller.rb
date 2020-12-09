@@ -4,10 +4,11 @@ class UsersController < ApplicationController
     #puts(current_user.account_id)
     @hand_cards = Card.where(pile_id: current_user.account_id).sort_by{ |card| card[:card_suit] }
     @visible_cards=Card.where(visible: true).sort_by{|card| card[:pile_id]}
-    @visible_users=[]
+    pile_ids=[]
     @visible_cards.each do |card|
-      @visible_users.append(Users.where(account_id: card[:pile_id]))
+      pile_ids.append(card[:pile_id])
     end
+    @visible_users=User.where(account_id: pile_ids)
     render partial: "user_hand"
   end
 
@@ -43,6 +44,24 @@ class UsersController < ApplicationController
         player = params[:player_id].to_i
         send_to_player(player)
       end
+    elsif params[:commit]=="Toggle Visibility"
+      makeVisible
+    end
+  end
+
+  def makeVisible
+    if params[:selected_card].present?
+      params[:selected_card].keys.each do |card|
+        selected_card = Card.find_by_id(card)
+        if(selected_card[:visible])
+          selected_card.update(visible: false)
+        else
+          selected_card.update(visible: true)
+        end
+      end
+      flash[:notice] = 'Card made Visible!'
+    else
+      flash[:notice] = 'No card selected'
     end
   end
 
