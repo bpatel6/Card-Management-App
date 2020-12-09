@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2020_11_21_033613) do
     t.string "card_value"
     t.string "card_suit"
     t.integer "pile_id"
+    t.boolean "visible"
   end
 
   create_table "scores", force: :cascade do |t|
