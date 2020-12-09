@@ -22,6 +22,6 @@ Rails.application.routes.draw do
   post 'users/decrement_score'
 
   resources :settings
-  root :to => redirect('/settings')
+  post 'settings/index'
 
 end

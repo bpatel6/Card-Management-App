@@ -1,7 +1,5 @@
 class SessionsController < ApplicationController
-
   def new
-
   end
 
   def show
@@ -19,7 +17,14 @@ class SessionsController < ApplicationController
     redirect_to sessions_show_path, notice: 'signed in'
   end
 
+  def setSettings
+    redirect_to settings_path
+  end
+
   def createSession
+    #params[:setting] is obtained sent from a submit tag from /views/settings/index.html.erb
+    settingsHash = params[:settings]
+
     session_id = rand(10 ** 6)
     setting = Settings.new
     if Settings.find_by_session_id(session_id).nil?
@@ -31,9 +36,9 @@ class SessionsController < ApplicationController
     current_user[:active_session] = session_id
     current_user.save!
     setting.uid = current_user.uid
-    setting.num_decks = 1
-    setting.num_players = 2
-    setting.deck_settings = nil
+    setting.num_decks = settingsHash[:num_decks]
+    setting.num_players =settingsHash[:num_players]
+    setting.deck_settings =settingsHash[:card_options]
     setting.save!
     redirect_to users_show_path, notice: 'Session created successfully, Share session code with others to join'
   end
