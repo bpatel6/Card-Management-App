@@ -70,6 +70,9 @@ class UsersController < ApplicationController
       params[:selected_card].keys.each do |card|
         selected_card = Card.find_by_id(card)
         selected_card.update(pile_id: 100)
+        if selected_card[:visible]
+          selected_card.update(visible: false)
+        end
       end
       flash[:notice] = 'Card discarded successfully!'
     else
