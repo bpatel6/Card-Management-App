@@ -12,7 +12,6 @@ class CardsController < ApplicationController
     end
 
     dealnum = Integer(params[:num_cards])
-
     # loops through each user
     users.each do |user|
 
