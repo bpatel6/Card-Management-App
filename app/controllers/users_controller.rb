@@ -3,6 +3,11 @@ class UsersController < ApplicationController
   def user_hand
     #puts(current_user.account_id)
     @hand_cards = Card.where(pile_id: current_user.account_id).sort_by{ |card| card[:card_suit] }
+    @visible_cards=Card.where(visible: true).sort_by{|card| card[:pile_id]}
+    @visible_users=[]
+    @visible_cards.each do |card|
+      @visible_users.append(Users.where(account_id: card[:pile_id]))
+    end
     render partial: "user_hand"
   end
 
