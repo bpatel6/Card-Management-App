@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def draw
-    cards = Card.where(pile_id: 0)
+    cards = Card.where(pile_id: current_user.active_session)
     card = cards[rand(cards.length)]
     if card.nil?
       flash[:notice] = 'No card available in the deck'
@@ -69,7 +69,7 @@ class UsersController < ApplicationController
     if params[:selected_card].present?
       params[:selected_card].keys.each do |card|
         selected_card = Card.find_by_id(card)
-        selected_card.update(pile_id: 100)
+        selected_card.update(pile_id: 1000000 + current_user.active_session)
         if selected_card[:visible]
           selected_card.update(visible: false)
         end

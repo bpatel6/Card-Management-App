@@ -17,8 +17,44 @@ class SessionsController < ApplicationController
     redirect_to sessions_show_path, notice: 'signed in'
   end
 
-  def setSettings
-    redirect_to settings_path
+  def createDeck(num_decks,deck_options,deck_num)
+    number_deck = num_decks.to_i
+    ranks = %w[A 1 2 3 4 5 6 7 8 9 10 J Q K]
+    suits = %w[C D H S]
+    deck = []
+    if deck_options == 'random half deck'
+      half_ranks = ranks.sample(7)
+      suits.each do |suit|
+        half_ranks.each do |rank|
+          deck << {:card_value => rank,:card_suit => suit, :pile_id =>deck_num}
+        end
+      end
+    elsif deck_options == 'only black cards'
+      black_suit = %w[C S]
+      black_suit.each do |suit|
+        ranks.each do |rank|
+          deck << {:card_value => rank,:card_suit => suit, :pile_id =>deck_num}
+        end
+      end
+    elsif deck_options == 'only red cards'
+      red_suit = %w[D H]
+      red_suit.each do |suit|
+        ranks.each do |rank|
+          deck << {:card_value => rank,:card_suit => suit, :pile_id =>deck_num}
+        end
+      end
+    else
+      suits.each do |suit|
+        ranks.each do |rank|
+          deck << {:card_value => rank,:card_suit => suit, :pile_id =>deck_num}
+        end
+      end
+    end
+    number_deck.times do
+      deck.each do |card|
+        Card.create!(card)
+      end
+    end
   end
 
   def createSession
@@ -39,6 +75,7 @@ class SessionsController < ApplicationController
     setting.num_decks = settingsHash[:num_decks]
     setting.num_players =settingsHash[:num_players]
     setting.deck_settings =settingsHash[:card_options]
+    createDeck(settingsHash[:num_decks],settingsHash[:card_options],session_id)
     setting.save!
     redirect_to users_show_path, notice: 'Session created successfully, Share session code with others to join'
   end
