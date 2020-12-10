@@ -5,4 +5,5 @@ class CardsControllerTest < ActionDispatch::IntegrationTest
     get cards_path
     assert_response :success
   end
+
 end
