@@ -8,7 +8,7 @@
   <%= select :settings, :num_decks, ['1','2','3','4','5','6','7','8','9','10'], {}, {:class => 'form-control col-1'}%>
 
   <%= label :settings, :card_options, 'Card Options', :class => 'col-form-label'  %>
-  <%= select :settings, :card_options, ['Full Deck','only black cards','random half deck','only red cards'], {}, {:class => 'form-control col-1'} %>
+  <%= select :settings, :card_options, ['full deck','random half deck','only black cards','only red cards'], {}, {:class => 'form-control col-1'} %>
 
   <%= submit_tag "Save Settings"%>
 <% end %>
