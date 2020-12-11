@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
 
   def user_hand
-    #puts(current_user.account_id)
     @hand_cards = Card.where(pile_id: current_user.account_id).sort_by{ |card| card[:card_suit] }
-    @visible_cards=Card.where(visible: true).sort_by{|card| card[:pile_id]}
+    @visible_cards = Card.where(visible: true).sort_by{|card| card[:pile_id]}
     pile_ids=[]
     @visible_cards.each do |card|
       pile_ids.append(card[:pile_id])
@@ -44,7 +43,7 @@ class UsersController < ApplicationController
         player = params[:player_id].to_i
         send_to_player(player)
       end
-    elsif params[:commit]=="Toggle Visibility"
+    elsif params[:commit] == "Toggle Visibility"
       makeVisible
     end
   end
