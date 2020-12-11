@@ -1,4 +1,28 @@
 <div class="row">
+  <div class="rounded border border-dark" style="background-color: #b8b7b7; padding: 20px">
+    <h4>Game Stats:</h4>
+    <div class="row">
+      <p class="col-6">Number of TOTAL players:</p>
+      <p class="col-6"><%= User.where(active_session: current_user.active_session).count%></p>
+    </div>
+    <% User.where(active_session: current_user.active_session).each do |user| %>
+      <div class="row">
+        <div class="col-6"> <%= user.name + "'s Number of Cards:" %></div>
+        <div class="col-6"> <%= Card.where(pile_id: user.account_id).count %></div>
+      </div>
+    <% end %>
+    <div style="padding-top: 15px;">
+      <h5> Scoreboard: </h5>
+      <% User.where(active_session: current_user.active_session).each do |user| %>
+        <div class="row">
+          <div class="col-6"> <%= user.name %> </div>
+          <div class="col-6"> <%= Score.find_by(email: user.email)[:score] %></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="row">
   <div class="col-6">
     <%= button_to 'Draw Card', users_draw_path, class: 'btn' %>
     <%= form_with url: users_update_path do |f| %>
@@ -60,28 +84,6 @@
       </tbody>
     </table>
 
-  </div>
-  <div class="col-6 rounded border border-dark" style="background-color: #b8b7b7; padding: 20px">
-    <h4>Game Stats:</h4>
-    <div class="row">
-      <p class="col-6">Number of TOTAL players:</p>
-      <p class="col-6"><%= User.where(active_session: current_user.active_session).count%></p>
-    </div>
-    <% User.where(active_session: current_user.active_session).each do |user| %>
-      <div class="row">
-        <div class="col-6"> <%= user.name + "'s Number of Cards:" %></div>
-        <div class="col-6"> <%= Card.where(pile_id: user.account_id).count %></div>
-      </div>
-    <% end %>
-    <div style="padding-top: 15px;">
-      <h5> Scoreboard: </h5>
-      <% User.where(active_session: current_user.active_session).each do |user| %>
-        <div class="row">
-          <div class="col-6"> <%= user.name %> </div>
-          <div class="col-6"> <%= Score.find_by(email: user.email)[:score] %></div>
-        </div>
-      <% end %>
-    </div>
   </div>
 </div>
 
