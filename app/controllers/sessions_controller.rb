@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
 
   def createDeck(num_decks,deck_options,deck_num)
     number_deck = num_decks.to_i
-    ranks = %w[A 1 2 3 4 5 6 7 8 9 10 J Q K]
+    ranks = %w[A 2 3 4 5 6 7 8 9 10 J Q K]
     suits = %w[C D H S]
     deck = []
     if deck_options == 'random half deck'
@@ -105,10 +105,9 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    cards = Card.all
-    cards.each do |card|
-      card.update(pile_id: 0)
-    end
+    cards = Card.where(pile_id: current_user.account_id)
+    cards.each(&:destroy)
+    Score.find_by_email(current_user.email).update(score: 0)
     session[:session_token] = nil
     redirect_to root_url, notice: 'signed out'
   end
