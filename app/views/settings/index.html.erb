@@ -16,9 +16,22 @@
         outline: none !important;
         box-shadow: none;
     }
+
+    .col-form-label {
+        font-family: Verdana;
+    }
+
+    .centered {
+        position: fixed;
+        left: 50%;
+        transform: translate(-50%);
+    }
 </style>
 
+<div class="centered">
 <h1 style="color: gray; font-family: Verdana"> Card Management Settings</h1>
+  <hr>
+  <br>
 
 <%= form_tag sessions_createSession_path, :class => 'form' do %>
   <%= label :settings, :num_players, 'Number of Players', :class => 'col-form-label'%>
@@ -35,3 +48,4 @@
   <br>
   <%= submit_tag "Save Settings", class: 'btn'%>
 <% end %>
+</div>
