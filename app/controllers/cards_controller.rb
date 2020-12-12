@@ -10,10 +10,7 @@ class CardsController < ApplicationController
   end
 
   def deal_all
-    users = User.pluck(:account_id)
-    users.each do |user|
-      puts(user)
-    end
+    users = User.where(active_session: current_user.active_session)
 
     dealnum = Integer(params[:num_cards])
     # loops through each user
@@ -23,16 +20,15 @@ class CardsController < ApplicationController
       i = 0
       while i < dealnum do
         # gets the most updated form of the deck
-        deck = Card.where(pile_id: 0)
+        deck = Card.where(pile_id: current_user.active_session)
         # gets a random card
         if(deck.length==0)
           flash[:notice]= "The Deck is Out of Cards"
           redirect_to users_show_path
-          return
         end
         card = deck[rand(deck.length)]
         # puts that random card in the current user's hand
-        card.update(pile_id: user)
+        card.update(pile_id: user.account_id)
         # increments loop counter
         i=i+1
       end
