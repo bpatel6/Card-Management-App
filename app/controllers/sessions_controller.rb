@@ -107,6 +107,7 @@ class SessionsController < ApplicationController
   def destroy
     cards = Card.where(pile_id: current_user.account_id)
     cards.each(&:destroy)
+    current_user.active_session = null
     Score.find_by_email(current_user.email).update(score: 0)
     session[:session_token] = nil
     redirect_to root_url, notice: 'signed out'
