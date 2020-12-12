@@ -105,7 +105,8 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    current_user.update(active_session: null)
+    user = User.find_by_account_id(current_user.account_id)
+    user.update(active_session: nil)
     cards = Card.where(pile_id: current_user.account_id)
     cards.each(&:destroy)
     Score.find_by_email(current_user.email).update(score: 0)
