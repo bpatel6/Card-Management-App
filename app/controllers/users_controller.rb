@@ -2,7 +2,12 @@ class UsersController < ApplicationController
 
   def user_hand
     @hand_cards = Card.where(pile_id: current_user.account_id).sort_by{ |card| card[:card_suit] }
-    @visible_cards = Card.where(visible: true).sort_by{|card| card[:pile_id]}
+    @active_user = User.where(active_session: current_user.active_session)
+    @list = []
+    @active_user.each do |player|
+      @list << player.account_id
+    end
+    @visible_cards = Card.where(visible: true).where(pile_id: @list).sort_by{|card| card[:pile_id]}
     pile_ids=[]
     @visible_cards.each do |card|
       pile_ids.append(card[:pile_id])
@@ -52,7 +57,7 @@ class UsersController < ApplicationController
     if params[:selected_card].present?
       params[:selected_card].keys.each do |card|
         selected_card = Card.find_by_id(card)
-        if(selected_card[:visible])
+        if selected_card[:visible]
           selected_card.update(visible: false)
         else
           selected_card.update(visible: true)
