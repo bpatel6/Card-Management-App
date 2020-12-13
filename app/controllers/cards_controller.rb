@@ -22,9 +22,9 @@ class CardsController < ApplicationController
         # gets the most updated form of the deck
         deck = Card.where(pile_id: current_user.active_session)
         # gets a random card
-        if(deck.length==0)
-          flash[:notice]= "The Deck is Out of Cards"
-          redirect_to users_show_path
+        if deck.length == 0
+          flash[:notice] = "The Deck ran Out of Cards"
+          break
         end
         card = deck[rand(deck.length)]
         # puts that random card in the current user's hand
