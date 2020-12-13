@@ -11,34 +11,33 @@ class CardsController < ApplicationController
 
   def deal_all
     users = User.where(active_session: current_user.active_session)
-
+    deck = Card.where(pile_id: current_user.active_session)
     dealnum = Integer(params[:num_cards])
-    # loops through each user
-    users.each do |user|
 
-      # loops through the requested number of cards
-      i = 0
-      while i < dealnum do
-        # gets the most updated form of the deck
+    if deck.length == 0
+      flash[:notice] = "The deck ran out of cards"
+      redirect_to users_show_path
+    else
+      users.each do |user|
         deck = Card.where(pile_id: current_user.active_session)
-        # gets a random card
+        # loops through the requested number of cards
         if deck.length == 0
-          flash[:notice] = "The Deck ran Out of Cards"
           break
         end
-        card = deck[rand(deck.length)]
-        # puts that random card in the current user's hand
-        card.update(pile_id: user.account_id)
-        # increments loop counter
-        i=i+1
+        i = 0
+        while i < dealnum do
+          if deck.length == 0
+            break
+          end
+          card = deck[rand(deck.length)]
+          # puts that random card in the current user's hand
+          card.update(pile_id: user.account_id)
+          # increments loop counter
+          i = i+1
+        end
+        flash[:notice] = "You dealt #{users.length*i} cards"
       end
-      # end
-      flash[:notice] = "You dealt #{users.length*dealnum} cards"
+      redirect_to users_show_path
     end
-
-  redirect_to users_show_path
-
   end
-
-
 end
