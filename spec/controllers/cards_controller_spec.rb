@@ -8,6 +8,7 @@ RSpec.describe CardsController, type: :controller do
     end
   end
 
+
   describe 'deal all' do
     it 'successfully deals cards to all users' do
       # given there are 3 users:
@@ -35,7 +36,7 @@ RSpec.describe CardsController, type: :controller do
 
       # deal 3 cards
       params = ActionController::Parameters.new(num_cards: 3)
-      redirect_to cards_deal_all_path
+      controller.deal_all
     end
     it 'user1 has 3 cards' do
 
