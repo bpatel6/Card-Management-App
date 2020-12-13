@@ -34,15 +34,29 @@ RSpec.describe CardsController, type: :controller do
       end
 
       # deal 3 cards
-      params[:num_cards] = 3
-      deal_all
+      params = ActionController::Parameters.new(num_cards: 3)
+      redirect_to cards_deal_all_path
+    end
+    it 'user1 has 3 cards' do
 
-      # verify that each user has 3 cards
+    # verify that each user has 3 cards
+      newcards = Card.where(pile_id: 123)
+      newcards.each do |card|
+        puts card
+      end
+      expect(newcards.count).to eq(3)
+    end
 
-      expect(Card.where(pile_id: 123).count).to eq(3)
-      expect(Card.where(pile_id: 231).count).to eq(3)
-      expect(Card.where(pile_id: 321).count).to eq(3)
+    it 'user1 has 3 cards' do
 
+    newcards = Card.where(pile_id: 231)
+
+      expect(newcards.count).to eq(3)
+    end
+
+    it 'user1 has 3 cards' do
+    newcards = Card.where(pile_id: 321)
+      expect(newcards.count).to eq(3)
     end
   end
 end
