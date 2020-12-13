@@ -20,7 +20,11 @@
     </div>
   </div>
   </div>
-
+  <% if flash[:notice] %>
+    <div class="flash-message text-center rounded">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
   <br>
   <%= render_async user_hand_path, toggle: { selector: '#perform-turn', event: :click, start:true}, interval: 2000%>
 

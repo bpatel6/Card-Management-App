@@ -1,9 +1,9 @@
 <div class="container">
-  <%# if flash[:notice] %>
-<!--    <div class="flash-message text-center rounded">-->
-      <%#= flash[:notice] %>
-<!--    </div>-->
-  <%# end %>
+  <% if flash[:notice] %>
+    <div class="flash-message text-center rounded">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
 
   <div class="row text-center"> <h1>Deck Overview</h1> </div>
 
